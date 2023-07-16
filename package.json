@@ -1,0 +1,40 @@
+{
+  "name": "project-query-cache",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "index.js",
+  "proxy": "http://localhost:4000",
+  "scripts": {
+    "start": "concurrently \"npm run dev\" \"npm run server\"",
+    "dev": "vite",
+    "server": "json-server --watch db.json --port 4000",
+    "build": "tsc && vite build",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "concurrently": "^8.2.0",
+    "json-server": "^0.17.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.14.1",
+    "styled-components": "^6.0.4"
+  },
+  "devDependencies": {
+    "@types/json-server": "^0.14.4",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "@types/styled-components": "^5.1.26",
+    "@typescript-eslint/eslint-plugin": "^5.61.0",
+    "@typescript-eslint/parser": "^5.61.0",
+    "@vitejs/plugin-react-swc": "^3.3.2",
+    "eslint": "^8.44.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.1",
+    "npm": "^9.8.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.0"
+  }
+}
