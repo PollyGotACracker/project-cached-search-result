@@ -1,6 +1,8 @@
 import { styled } from "styled-components";
 import { SickData } from "../types/sick";
 import KeywordItem from "./KeywordItem";
+import useCacheData from "../hooks/useCacheData";
+import SearchIcon from "./SearchIcon";
 
 type KeywordListProps = {
   data: SickData[];
@@ -8,16 +10,29 @@ type KeywordListProps = {
 };
 
 const KeywordList: React.FC<KeywordListProps> = ({ data, inputValue }) => {
+  const isInResults = data.length !== 0;
+  const isNoResults = inputValue && data.length === 0;
+
   const content = data?.map((item) => (
     <KeywordItem key={item.sickCd} item={item} />
   ));
 
   return (
     <StyledKeywordList>
-      <StyledKeywordListTitle>
-        {inputValue ? "추천 검색어" : "검색어 없음"}
-      </StyledKeywordListTitle>
-      {content}
+      {inputValue && (
+        <StyledKeywordValue>
+          <SearchIcon />
+          {inputValue}
+        </StyledKeywordValue>
+      )}
+      {!inputValue && <StyledListTitle>{"최근 검색어"}</StyledListTitle>}
+      {isInResults && (
+        <>
+          <StyledListTitle>{"추천 검색어"}</StyledListTitle>
+          {content}
+        </>
+      )}
+      {isNoResults && <StyledListTitle>{"검색어 없음"}</StyledListTitle>}
     </StyledKeywordList>
   );
 };
@@ -32,10 +47,26 @@ const StyledKeywordList = styled.div`
   padding: 30px 0;
 `;
 
-const StyledKeywordListTitle = styled.div`
+const StyledListTitle = styled.div`
   padding: 0 30px;
   font-size: 0.8rem;
   color: gray;
+`;
+
+const StyledKeywordValue = styled.div`
+  width: 100%;
+  display: flex;
+  column-gap: 10px;
+  margin: 5px 0;
+  padding: 5px 30px;
+  outline: none;
+  font-weight: 700;
+
+  & > svg {
+    width: 18px;
+    filter: invert(50%);
+    flex-shrink: 0;
+  }
 `;
 
 export default KeywordList;

@@ -7,20 +7,27 @@ import SearchInput from "../components/SearchInput";
 import SearchClear from "../components/SearchClear";
 import SearchButton from "../components/SearchButton";
 import KeywordList from "../components/KeywordList";
+import useCacheData from "../hooks/useCacheData";
 
 const Home = () => {
+  const { getSickList } = useApiContext();
+  const { getCachedItem, setCachedItem } = useCacheData<SickData>();
   const [sickList, setSickList] = useState<SickData[] | []>([]);
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
-  const { getSickList } = useApiContext();
 
-  // 임시 코드
   useEffect(() => {
     (async () => {
-      if (!inputValue) return;
-      const data = await getSickList(inputValue);
-      if (Array.isArray(data)) setSickList([...data]);
-      if (!data || !inputValue) setSickList([]);
+      if (!inputValue) return setSickList([]);
+      const isValid = /^[\uAC00-\uD7A3|A-Z|a-z|\s]*$/.test(inputValue);
+      if (isValid) {
+        let data: SickData[] | [] | boolean | void;
+        data = getCachedItem(inputValue);
+        if (!data) data = await getSickList(inputValue);
+        const result = Array.isArray(data) ? data : [];
+        setSickList([...result]);
+        setCachedItem(inputValue, result);
+      }
     })();
   }, [inputValue]);
 
