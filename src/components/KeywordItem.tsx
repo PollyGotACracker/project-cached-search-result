@@ -11,7 +11,7 @@ const KeywordItem: React.FC<{ item: SickData }> = ({ item }) => {
   );
 };
 
-const StyledKeywordItem = styled.a`
+const StyledKeywordItem = styled.div`
   width: 100%;
   display: flex;
   column-gap: 10px;

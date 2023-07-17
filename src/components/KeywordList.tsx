@@ -3,17 +3,20 @@ import { SickData } from "../types/sick";
 import KeywordItem from "./KeywordItem";
 
 type KeywordListProps = {
-  data?: SickData[];
+  data: SickData[];
+  inputValue: string;
 };
 
-const KeywordList: React.FC<KeywordListProps> = ({ data }) => {
+const KeywordList: React.FC<KeywordListProps> = ({ data, inputValue }) => {
   const content = data?.map((item) => (
     <KeywordItem key={item.sickCd} item={item} />
   ));
 
   return (
     <StyledKeywordList>
-      <StyledKeywordListTitle>추천 검색어</StyledKeywordListTitle>
+      <StyledKeywordListTitle>
+        {inputValue ? "추천 검색어" : "검색어 없음"}
+      </StyledKeywordListTitle>
       {content}
     </StyledKeywordList>
   );
