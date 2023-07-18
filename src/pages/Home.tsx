@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import { useApiContext } from "../contexts/ApiContext";
 import { SickData } from "../types/sick";
+import useCacheData from "../hooks/useCacheData";
+import { getRecentKeys } from "../utils/recentStorage";
+import checkEmptyText from "../utils/checkEmptyText";
 import Title from "../components/Title";
 import SearchBar from "../components/SearchBar";
 import SearchInput from "../components/SearchInput";
 import SearchClear from "../components/SearchClear";
 import SearchButton from "../components/SearchButton";
 import KeywordList from "../components/KeywordList";
-import useCacheData from "../hooks/useCacheData";
-import { getRecentKeys, setRecentKeys } from "../utils/recentStorage";
 
 const Home = () => {
   const { getSickList } = useApiContext();
@@ -19,7 +20,7 @@ const Home = () => {
 
   useEffect(() => {
     (async () => {
-      if (!inputValue) return setSickList([]);
+      if (!inputValue || checkEmptyText(inputValue)) return setSickList([]);
       const isValid = /^[\uAC00-\uD7A3|A-Z|a-z|\s]*$/.test(inputValue);
       if (isValid) {
         let data: SickData[] | [] | boolean | void;

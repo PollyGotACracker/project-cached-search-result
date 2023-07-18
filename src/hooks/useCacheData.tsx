@@ -1,4 +1,5 @@
 import { useState } from "react";
+import checkEmptyText from "../utils/checkEmptyText";
 
 type CachedItem<T> = T[];
 type CachedList<T> = { [key: string]: T[] };
@@ -12,6 +13,7 @@ const useCacheData = <T,>() => {
   };
 
   const setCachedItem = (key: string, value: CachedItem<T> | []) => {
+    if (checkEmptyText(key)) return;
     setCachedList({ ...cachedList, [key]: value });
   };
 
