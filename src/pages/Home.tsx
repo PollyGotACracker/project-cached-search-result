@@ -13,7 +13,7 @@ import KeywordList from "../components/KeywordList";
 
 const Home = () => {
   const { getSickList } = useApiContext();
-  const { getCachedItem, setCachedItem } = useCacheData<SickData>();
+  const { getCachedItem, setCachedItem } = useCacheData<SickData>(1);
   const [sickList, setSickList] = useState<SickData[] | []>([]);
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
@@ -23,7 +23,7 @@ const Home = () => {
       if (!inputValue || checkEmptyText(inputValue)) return setSickList([]);
       const isValid = /^[\uAC00-\uD7A3|A-Z|a-z|\s]*$/.test(inputValue);
       if (isValid) {
-        let data: SickData[] | [] | boolean | void;
+        let data;
         data = getCachedItem(inputValue);
         if (!data) data = await getSickList(inputValue);
         const result = Array.isArray(data) ? data : [];
