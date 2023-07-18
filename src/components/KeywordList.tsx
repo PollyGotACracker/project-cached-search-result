@@ -1,18 +1,25 @@
 import { styled } from "styled-components";
 import { SickData } from "../types/sick";
 import KeywordItem from "./KeywordItem";
-import useCacheData from "../hooks/useCacheData";
 import SearchIcon from "./SearchIcon";
 
 type KeywordListProps = {
+  recentKeys: string[];
   data: SickData[];
   inputValue: string;
 };
 
-const KeywordList: React.FC<KeywordListProps> = ({ data, inputValue }) => {
+const KeywordList: React.FC<KeywordListProps> = ({
+  recentKeys,
+  data,
+  inputValue,
+}) => {
   const isInResults = data.length !== 0;
   const isNoResults = inputValue && data.length === 0;
 
+  const recents = recentKeys?.map((key) => (
+    <KeywordItem key={key} text={key}></KeywordItem>
+  ));
   const content = data?.map((item) => (
     <KeywordItem key={item.sickCd} item={item} />
   ));
@@ -25,7 +32,12 @@ const KeywordList: React.FC<KeywordListProps> = ({ data, inputValue }) => {
           {inputValue}
         </StyledKeywordValue>
       )}
-      {!inputValue && <StyledListTitle>{"최근 검색어"}</StyledListTitle>}
+      {!inputValue && (
+        <>
+          <StyledListTitle>{"최근 검색어"}</StyledListTitle>
+          {recents}
+        </>
+      )}
       {isInResults && (
         <>
           <StyledListTitle>{"추천 검색어"}</StyledListTitle>

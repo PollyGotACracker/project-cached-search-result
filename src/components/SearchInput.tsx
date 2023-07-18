@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useRef } from "react";
 import { styled } from "styled-components";
 import SearchIcon from "./SearchIcon";
+import searchSubmit from "../utils/searchSubmit";
 
 type SearchInputProps = {
   isFocused: boolean;
@@ -36,6 +37,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
         ref={inputRef}
         spellCheck={false}
         onFocus={() => setIsFocused(true)}
+        onKeyDown={(e) => searchSubmit(e, inputValue)}
       />
     </StyledInputWrapper>
   );

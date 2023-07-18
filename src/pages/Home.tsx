@@ -8,6 +8,7 @@ import SearchClear from "../components/SearchClear";
 import SearchButton from "../components/SearchButton";
 import KeywordList from "../components/KeywordList";
 import useCacheData from "../hooks/useCacheData";
+import { getRecentKeys, setRecentKeys } from "../utils/recentStorage";
 
 const Home = () => {
   const { getSickList } = useApiContext();
@@ -44,8 +45,14 @@ const Home = () => {
         {inputValue && (
           <SearchClear setInputValue={setInputValue} setData={setSickList} />
         )}
-        <SearchButton />
-        {isFocused && <KeywordList inputValue={inputValue} data={sickList} />}
+        <SearchButton inputValue={inputValue} />
+        {isFocused && (
+          <KeywordList
+            inputValue={inputValue}
+            data={sickList}
+            recentKeys={getRecentKeys()}
+          />
+        )}
       </SearchBar>
     </main>
   );

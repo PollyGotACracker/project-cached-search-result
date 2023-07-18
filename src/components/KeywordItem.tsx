@@ -1,12 +1,23 @@
 import { styled } from "styled-components";
 import { SickData } from "../types/sick";
 import SearchIcon from "./SearchIcon";
+import searchSubmit from "../utils/searchSubmit";
 
-const KeywordItem: React.FC<{ item: SickData }> = ({ item }) => {
+const KeywordItem: React.FC<{ text?: string; item?: SickData }> = ({
+  text,
+  item,
+}) => {
   return (
-    <StyledKeywordItem data-code={item.sickCd} tabIndex={0}>
+    <StyledKeywordItem
+      data-code={item?.sickCd || text}
+      tabIndex={0}
+      onClick={(e) => {
+        const value = item?.sickNm || text;
+        searchSubmit(e, value);
+      }}
+    >
       <SearchIcon />
-      {item.sickNm}
+      {item?.sickNm || text}
     </StyledKeywordItem>
   );
 };
