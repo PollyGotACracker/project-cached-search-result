@@ -14,6 +14,7 @@ const SearchClear: React.FC<SearchClearProps<SickData>> = ({
   return (
     <StyledSearchClear
       type="button"
+      title="전부 지우기"
       tabIndex={-1}
       onClick={() => {
         setInputValue("");

@@ -2,22 +2,32 @@ import { styled } from "styled-components";
 import { SickData } from "../types/sick";
 import SearchIcon from "./SearchIcon";
 import searchSubmit from "../utils/searchSubmit";
+import getHighlighted from "../utils/getHighlighted";
 
-const KeywordItem: React.FC<{ text?: string; item?: SickData }> = ({
-  text,
-  item,
+type KeywordItemProps = {
+  inputValue: string;
+  recent?: string;
+  result?: SickData;
+};
+
+const KeywordItem: React.FC<KeywordItemProps> = ({
+  inputValue,
+  recent,
+  result,
 }) => {
+  const highlighted = result && getHighlighted(result?.sickNm, inputValue);
+
   return (
     <StyledKeywordItem
-      data-code={item?.sickCd || text}
+      data-code={result?.sickCd || recent}
       tabIndex={0}
       onClick={(e) => {
-        const value = item?.sickNm || text;
-        searchSubmit(e, value);
+        const word = result?.sickNm || recent;
+        searchSubmit(e, word);
       }}
     >
-      <SearchIcon />
-      {item?.sickNm || text}
+      <SearchIcon size={18} invert={50} />
+      {highlighted || recent}
     </StyledKeywordItem>
   );
 };
@@ -28,18 +38,12 @@ const StyledKeywordItem = styled.div`
   column-gap: 10px;
   margin: 5px 0;
   cursor: pointer;
-  padding: 5px 30px;
   outline: none;
+  padding: 5px 30px;
 
   &:hover,
   &:focus {
     background-color: rgba(0, 0, 0, 0.05);
-  }
-
-  & > svg {
-    width: 18px;
-    filter: invert(50%);
-    flex-shrink: 0;
   }
 `;
 

@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import { SickData } from "../types/sick";
 import KeywordItem from "./KeywordItem";
 import SearchIcon from "./SearchIcon";
+import KeywordGroup from "./KeywordGroup";
 
 type KeywordListProps = {
   recentKeys: string[];
@@ -14,37 +15,34 @@ const KeywordList: React.FC<KeywordListProps> = ({
   data,
   inputValue,
 }) => {
-  const isInResults = data.length !== 0;
+  const hasRecents = recentKeys.length !== 0;
+  const hasResults = data.length !== 0;
   const isNoResults = inputValue && data.length === 0;
 
   const recents = recentKeys?.map((key) => (
-    <KeywordItem key={key} text={key}></KeywordItem>
+    <KeywordItem key={key} inputValue={inputValue} recent={key}></KeywordItem>
   ));
   const content = data?.map((item) => (
-    <KeywordItem key={item.sickCd} item={item} />
+    <KeywordItem key={item.sickCd} inputValue={inputValue} result={item} />
   ));
 
   return (
     <StyledKeywordList>
       {inputValue && (
         <StyledKeywordValue>
-          <SearchIcon />
+          <SearchIcon size={18} invert={50} />
           {inputValue}
         </StyledKeywordValue>
       )}
       {!inputValue && (
-        <>
-          <StyledListTitle>{"최근 검색어"}</StyledListTitle>
-          {recents}
-        </>
+        <KeywordGroup title={"최근 검색어"}>
+          {hasRecents ? recents : "최근 검색어가 없습니다"}
+        </KeywordGroup>
       )}
-      {isInResults && (
-        <>
-          <StyledListTitle>{"추천 검색어"}</StyledListTitle>
-          {content}
-        </>
+      {hasResults && (
+        <KeywordGroup title={"추천 검색어"}>{content}</KeywordGroup>
       )}
-      {isNoResults && <StyledListTitle>{"검색어 없음"}</StyledListTitle>}
+      {isNoResults && <KeywordGroup title={"검색어 없음"} />}
     </StyledKeywordList>
   );
 };
@@ -57,12 +55,6 @@ const StyledKeywordList = styled.div`
   border-radius: 20px;
   width: 100%;
   padding: 30px 0;
-`;
-
-const StyledListTitle = styled.div`
-  padding: 0 30px;
-  font-size: 0.8rem;
-  color: gray;
 `;
 
 const StyledKeywordValue = styled.div`

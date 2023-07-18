@@ -23,7 +23,7 @@ const StyledSearchBar = styled.div`
   border: 2px solid;
   border-color: #ffffff;
   background-color: #ffffff;
-  padding: 20px 10px 20px 24px;
+  padding: 15px 10px 15px 24px;
   display: flex;
   place-items: center;
   column-gap: 20px;
@@ -31,6 +31,13 @@ const StyledSearchBar = styled.div`
   &:focus-within {
     border-color: var(--primary);
   }
+
+  // @media (pointer: coarse) {
+  //   width: auto;
+  //   flex: 1;
+  //   padding: 0;
+  //   column-gap: 5px;
+  // }
 `;
 
 export default SearchBar;

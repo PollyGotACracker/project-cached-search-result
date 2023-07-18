@@ -6,9 +6,10 @@ const SearchButton: React.FC<{ inputValue: string }> = ({ inputValue }) => {
   return (
     <StyledSearchButton
       type="button"
+      title="검색"
       onClick={(e) => searchSubmit(e, inputValue)}
     >
-      <SearchIcon />
+      <SearchIcon size={24} invert={100} />
     </StyledSearchButton>
   );
 };
@@ -21,10 +22,6 @@ const StyledSearchButton = styled.button`
   height: 48px;
   margin-left: auto;
   cursor: pointer;
-
-  & > svg {
-    filter: invert(100%);
-  }
 `;
 
 export default SearchButton;
