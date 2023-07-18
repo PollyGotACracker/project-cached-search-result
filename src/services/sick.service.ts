@@ -1,9 +1,15 @@
 import HttpClient from "./core";
 import { SickServiceType } from "../types/sick";
 
-export class SickService extends HttpClient implements SickServiceType {
+export class SickService implements SickServiceType {
+  private httpClient: HttpClient;
+
+  constructor(httpClient: HttpClient) {
+    this.httpClient = httpClient;
+  }
+
   async getSickList(value: string) {
-    return await this.axiosInstance
+    return await this.httpClient
       .get(`/sick?q=${value}`)
       .then((response) => {
         console.info("calling api");

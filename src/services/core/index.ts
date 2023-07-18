@@ -1,14 +1,18 @@
-import axios from "axios";
+import axios, { AxiosInstance, AxiosResponse } from "axios";
 
 class HttpClient {
   private BASE_URL = "http://localhost:4000";
 
-  protected axiosInstance = axios.create({
+  protected axiosInstance: AxiosInstance = axios.create({
     baseURL: this.BASE_URL,
     headers: {
       "Content-type": "application/json",
     },
   });
+
+  get(url: string): Promise<AxiosResponse> {
+    return this.axiosInstance.get(url);
+  }
 }
 
 export default HttpClient;
