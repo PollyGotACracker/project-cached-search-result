@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 
 class HttpClient {
-  private BASE_URL = "http://localhost:4000";
+  private BASE_URL = import.meta.env.PROD ? "/" : "http://localhost:4000";
 
   protected axiosInstance: AxiosInstance = axios.create({
     baseURL: this.BASE_URL,
