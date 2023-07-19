@@ -7,8 +7,10 @@ type CachedList<T> = { [key: string]: CachedItem<T> };
 const useCacheData = <T,>(expiresHour: number) => {
   const [cachedList, setCachedList] = useState<CachedList<T>>({});
 
-  const getCachedItem = (key: string): CachedItem<T> | boolean =>
-    cachedList[key] || false;
+  const getCachedItem = (key: string): T[] | boolean => {
+    const result = cachedList[key];
+    return result ? result.data : false;
+  };
 
   const setCachedItem = (key: string, value: T[] | []) => {
     if (checkEmptyText(key)) return;
