@@ -13,6 +13,6 @@ export const Router = createBrowserRouter(
         { path: "*", element: <Error /> },
       ],
     },
-  ]
-  // { basename: process.env.PUBLIC_URL }
+  ],
+  { basename: import.meta.env.PUBLIC_URL }
 );

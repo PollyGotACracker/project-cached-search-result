@@ -6,16 +6,18 @@
   "main": "index.js",
   "proxy": "http://localhost:4000",
   "scripts": {
-    "start": "concurrently \"npm run dev\" \"npm run server\"",
-    "dev": "vite",
-    "server": "json-server --watch db.json --port 4000",
-    "build": "tsc && vite build",
+    "start": "ts-node server/index.ts",
+    "dev": "concurrently \"vite\" \"npm run server\"",
+    "server": "json-server --watch server/db.json --port 4000",
+    "build": "cross-env NODE_PATH=src && tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "heroku-postbuild": "cross-env NODE_PATH=src npm run build"
   },
   "dependencies": {
     "axios": "^1.4.0",
     "concurrently": "^8.2.0",
+    "cross-env": "^7.0.3",
     "json-server": "^0.17.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -34,6 +36,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.1",
     "npm": "^9.8.0",
+    "ts-node": "^10.9.1",
     "typescript": "^5.0.2",
     "vite": "^4.4.0"
   }
