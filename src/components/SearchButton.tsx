@@ -15,9 +15,13 @@ const SearchButton: React.FC<{ inputValue: string }> = ({ inputValue }) => {
 };
 
 const StyledSearchButton = styled.button`
+  position: absolute;
+  top: calc(50% - 24px);
+  right: 10px;
   background-color: var(--primary);
   border: none;
   border-radius: 50%;
+  flex-shrink: 0;
   width: 48px;
   height: 48px;
   margin-left: auto;

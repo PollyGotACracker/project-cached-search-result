@@ -27,7 +27,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
     >
       {!isFocused && !inputValue && (
         <StyledSearchInit>
-          <SearchIcon size={24} invert={50} />
+          <SearchIcon size={20} invert={60} />
           <span>질환명을 입력해주세요</span>
         </StyledSearchInit>
       )}
@@ -47,6 +47,7 @@ const StyledInputWrapper = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
+  flex-shrink: 1;
 `;
 
 const StyledSearchInput = styled.input`
@@ -62,7 +63,7 @@ const StyledSearchInit = styled.div`
   display: flex;
   position: absolute;
   column-gap: 10px;
-  color: #aaa;
+  color: #a7afb7;
   font-weight: 700;
   cursor: text;
   -webkit-user-select: none;

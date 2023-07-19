@@ -14,21 +14,40 @@ const SearchClear: React.FC<SearchClearProps<SickData>> = ({
   return (
     <StyledSearchClear
       type="button"
-      title="전부 지우기"
+      title="지우기"
       tabIndex={-1}
       onClick={() => {
         setInputValue("");
         setData([]);
       }}
     >
-      &#10006;
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="15"
+        height="15"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#ffffff"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
     </StyledSearchClear>
   );
 };
 
 const StyledSearchClear = styled.button`
-  text-align: center;
-  background-color: gray;
+  position: absolute;
+  top: calc(50% - 10px);
+  right: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #a7afb7;
+  flex-shrink: 0;
   border: none;
   outline: none;
   width: 20px;

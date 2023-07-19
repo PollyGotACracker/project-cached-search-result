@@ -18,15 +18,15 @@ const SearchBar: React.FC<SearchBarProps> = ({ setIsFocused, children }) => {
 
 const StyledSearchBar = styled.div`
   position: relative;
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
   border-radius: 999px;
   border: 2px solid;
   border-color: #ffffff;
   background-color: #ffffff;
-  padding: 15px 10px 15px 24px;
+  padding: 20px 15px;
   display: flex;
   place-items: center;
-  column-gap: 20px;
 
   &:focus-within {
     border-color: var(--primary);

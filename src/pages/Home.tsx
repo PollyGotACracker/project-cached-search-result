@@ -43,7 +43,7 @@ const Home = () => {
           inputValue={inputValue}
           setInputValue={setInputValue}
         />
-        {inputValue && (
+        {isFocused && (
           <SearchClear setInputValue={setInputValue} setData={setSickList} />
         )}
         <SearchButton inputValue={inputValue} />
