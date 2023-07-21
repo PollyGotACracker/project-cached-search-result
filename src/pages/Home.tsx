@@ -18,15 +18,24 @@ const Home = () => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
 
+  const checkValidText = (value: string) => {
+    const isCompletedText = /^[\uAC00-\uD7A3|A-Z|a-z|\s]*$/.test(value);
+    if (checkEmptyText(value)) return false;
+    if (isCompletedText) return true;
+    return false;
+  };
+
+  const getCachedOrFetchData = async (value: string) => {
+    const data = getCachedItem(value) || (await getSickList(value));
+    return Array.isArray(data) ? data : [];
+  };
+
   useEffect(() => {
     (async () => {
-      if (!inputValue || checkEmptyText(inputValue)) return setSickList([]);
-      const isValid = /^[\uAC00-\uD7A3|A-Z|a-z|\s]*$/.test(inputValue);
-      if (isValid) {
-        let data;
-        data = getCachedItem(inputValue);
-        if (!data) data = await getSickList(inputValue);
-        const result = Array.isArray(data) ? data : [];
+      const isValidText = checkValidText(inputValue);
+      if (!isValidText) return setSickList([]);
+      if (isValidText) {
+        const result = await getCachedOrFetchData(inputValue);
         setSickList([...result]);
         setCachedItem(inputValue, result);
       }

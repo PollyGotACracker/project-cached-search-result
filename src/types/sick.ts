@@ -4,5 +4,5 @@ export interface SickData {
 }
 
 export interface SickServiceType {
-  getSickList: (value: string) => Promise<SickData[] | boolean | void>;
+  getSickList: (value: string) => Promise<SickData[] | void>;
 }
