@@ -2,6 +2,9 @@
 
 - 전유영
 - 2023.07.16 ~ 2023.07.19
+- :bulb: 07.21 REFACTORED:
+  1. Home 의 `useEffect` 코드 기능별 분리 및 `let` 키워드 변수 제거
+  2. 불필요한 boolean return 제거
 
 ## 배포 주소
 
@@ -12,7 +15,7 @@
 1. repository 에서 Code 버튼 클릭 후 HTTPS 주소 복사
 2. git bash 를 실행하고 `git clone <repo-url>`
 3. VSCode 에서 프로젝트를 열고 `npm install`, `npm start`
-4. 터미널 log 의 local 주소 ctrl + 클릭(port 4000)
+4. 터미널 log 의 local 주소 ctrl + 클릭 (기본 port 4000)
 
 ## 프로젝트 구조
 
@@ -73,7 +76,7 @@
   그래서 delay 를 주는 방법 대신, 입력된 문자가 모두 유효할 경우(완성형 한글, 영어 대소문자, 공백 허용)에만 요청하도록 정규표현식을 사용했습니다.
 
 ```js
-const isValid = /^[\uAC00-\uD7A3|A-Z|a-z|\s]*$/.test(inputValue);
+const isCompletedText = /^[\uAC00-\uD7A3|A-Z|a-z|\s]*$/.test(inputValue);
 ```
 
 ### 키보드로 추천 검색어 이동
@@ -83,6 +86,6 @@ const isValid = /^[\uAC00-\uD7A3|A-Z|a-z|\s]*$/.test(inputValue);
 
 ### 최근 검색어 구현
 
-- sessionStorage 에 배열로 저장하여 페이지를 닫았을 때 데이터를 삭제하도록 했습니다.  
+- `sessionStorage` 에 배열로 저장하여 페이지를 닫았을 때 데이터를 삭제하도록 했습니다.  
   스토리지 저장 메서드는 input enter, 검색 버튼 click, 추천 검색어 항목 클릭 시 호출됩니다.  
   input 의 값이 문자열이 아니거나, 중복 값인 경우 저장되지 않도록 했습니다.
