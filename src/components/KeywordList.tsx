@@ -20,7 +20,7 @@ const KeywordList: React.FC<KeywordListProps> = ({
   submitSearch,
 }) => {
   const hasRecents = recentKeys.length !== 0;
-  const hasResults = data.length !== 0;
+  const hasResults = inputValue && data.length !== 0;
   const isNoResults = inputValue && data.length === 0;
 
   const recents = recentKeys?.map((key) => (
