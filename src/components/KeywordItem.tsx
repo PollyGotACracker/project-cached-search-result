@@ -1,24 +1,26 @@
 import { styled } from "styled-components";
 import { SickData } from "../types/sick";
 import SearchIcon from "./SearchIcon";
-import searchSubmit from "../utils/searchSubmit";
 import getHighlighted from "../utils/getHighlighted";
+import { submitSearchType } from "../hooks/useSubmitSearch";
 
 type KeywordItemProps = {
   inputValue: string;
+  submitSearch: submitSearchType;
   recent?: string;
   result?: SickData;
 };
 
 const KeywordItem: React.FC<KeywordItemProps> = ({
   inputValue,
+  submitSearch,
   recent,
   result,
 }) => {
   const highlighted = result && getHighlighted(result?.sickNm, inputValue);
   const searchHandler = (e: React.SyntheticEvent) => {
     const word = result?.sickNm || recent;
-    searchSubmit(e, word);
+    submitSearch(e, word);
   };
 
   return (

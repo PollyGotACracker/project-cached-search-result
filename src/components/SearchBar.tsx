@@ -24,20 +24,13 @@ const StyledSearchBar = styled.div`
   border: 2px solid;
   border-color: #ffffff;
   background-color: #ffffff;
-  padding: 20px 15px;
+  padding: 25px 20px;
   display: flex;
   place-items: center;
 
   &:focus-within {
     border-color: var(--primary);
   }
-
-  // @media (pointer: coarse) {
-  //   width: auto;
-  //   flex: 1;
-  //   padding: 0;
-  //   column-gap: 5px;
-  // }
 `;
 
 export default SearchBar;

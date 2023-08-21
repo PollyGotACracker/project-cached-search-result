@@ -1,13 +1,16 @@
 import styled from "styled-components";
-import searchSubmit from "../utils/searchSubmit";
 import SearchIcon from "./SearchIcon";
+import { submitSearchType } from "../hooks/useSubmitSearch";
 
-const SearchButton: React.FC<{ inputValue: string }> = ({ inputValue }) => {
+const SearchButton: React.FC<{
+  inputValue: string;
+  submitSearch: submitSearchType;
+}> = ({ inputValue, submitSearch }) => {
   return (
     <StyledSearchButton
       type="button"
       title="검색"
-      onClick={(e) => searchSubmit(e, inputValue)}
+      onClick={(e) => submitSearch(e, inputValue)}
     >
       <SearchIcon size={24} invert={100} />
     </StyledSearchButton>

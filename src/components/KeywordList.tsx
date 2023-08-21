@@ -4,28 +4,40 @@ import KeywordItem from "./KeywordItem";
 import SearchIcon from "./SearchIcon";
 import KeywordGroup from "./KeywordGroup";
 import RecommendList from "./RecommendList";
-import searchSubmit from "../utils/searchSubmit";
+import { submitSearchType } from "../hooks/useSubmitSearch";
 
 type KeywordListProps = {
   recentKeys: string[];
   data: SickData[];
   inputValue: string;
+  submitSearch: submitSearchType;
 };
 
 const KeywordList: React.FC<KeywordListProps> = ({
   recentKeys,
   data,
   inputValue,
+  submitSearch,
 }) => {
   const hasRecents = recentKeys.length !== 0;
   const hasResults = data.length !== 0;
   const isNoResults = inputValue && data.length === 0;
 
   const recents = recentKeys?.map((key) => (
-    <KeywordItem key={key} inputValue={inputValue} recent={key}></KeywordItem>
+    <KeywordItem
+      key={key}
+      inputValue={inputValue}
+      submitSearch={submitSearch}
+      recent={key}
+    ></KeywordItem>
   ));
   const content = data?.map((item) => (
-    <KeywordItem key={item.sickCd} inputValue={inputValue} result={item} />
+    <KeywordItem
+      key={item.sickCd}
+      inputValue={inputValue}
+      submitSearch={submitSearch}
+      result={item}
+    />
   ));
 
   return (
@@ -33,7 +45,7 @@ const KeywordList: React.FC<KeywordListProps> = ({
       {inputValue && (
         <StyledKeywordValue
           tabIndex={0}
-          onClick={(e) => searchSubmit(e, inputValue)}
+          onClick={(e) => submitSearch(e, inputValue)}
         >
           <SearchIcon size={18} invert={50} />
           {inputValue}
@@ -52,7 +64,7 @@ const KeywordList: React.FC<KeywordListProps> = ({
         <>
           <StyledHr />
           <KeywordGroup title={"추천 검색어로 검색해보세요"}>
-            <RecommendList />
+            <RecommendList submitSearch={submitSearch} />
           </KeywordGroup>
         </>
       )}

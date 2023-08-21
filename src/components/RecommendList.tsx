@@ -1,12 +1,14 @@
 import { styled } from "styled-components";
 import { recommends } from "../constants/recommends";
-import searchSubmit from "../utils/searchSubmit";
+import { submitSearchType } from "../hooks/useSubmitSearch";
 
-const RecommendList = () => {
+const RecommendList: React.FC<{
+  submitSearch: submitSearchType;
+}> = ({ submitSearch }) => {
   return (
     <StyledRecommendList>
       {recommends.map((item) => (
-        <StyledRecommend key={item} onClick={(e) => searchSubmit(e, item)}>
+        <StyledRecommend key={item} onClick={(e) => submitSearch(e, item)}>
           {item}
         </StyledRecommend>
       ))}

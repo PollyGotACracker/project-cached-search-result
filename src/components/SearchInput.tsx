@@ -1,13 +1,14 @@
 import { Dispatch, SetStateAction, useRef } from "react";
 import { styled } from "styled-components";
 import SearchIcon from "./SearchIcon";
-import searchSubmit from "../utils/searchSubmit";
+import { submitSearchType } from "../hooks/useSubmitSearch";
 
 type SearchInputProps = {
   isFocused: boolean;
   setIsFocused: Dispatch<SetStateAction<boolean>>;
   inputValue: string;
   setInputValue: Dispatch<SetStateAction<string>>;
+  submitSearch: submitSearchType;
 };
 
 const SearchInput: React.FC<SearchInputProps> = ({
@@ -15,6 +16,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   setIsFocused,
   inputValue,
   setInputValue,
+  submitSearch,
 }) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -37,7 +39,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
         ref={inputRef}
         spellCheck={false}
         onFocus={() => setIsFocused(true)}
-        onKeyDown={(e) => searchSubmit(e, inputValue)}
+        onKeyDown={(e) => submitSearch(e, inputValue)}
       />
     </StyledInputWrapper>
   );
@@ -53,7 +55,7 @@ const StyledInputWrapper = styled.div`
 const StyledSearchInput = styled.input`
   border: 0;
   outline: 0;
-  flex: 1;
+  width: calc(100% - 80px);
   background-color: transparent;
   font-size: 1.125rem;
   caret-color: var(--primary);

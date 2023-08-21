@@ -10,6 +10,7 @@ import SearchInput from "../components/SearchInput";
 import SearchClear from "../components/SearchClear";
 import SearchButton from "../components/SearchButton";
 import KeywordList from "../components/KeywordList";
+import useSubmitSearch from "../hooks/useSubmitSearch";
 
 const Home = () => {
   const { getSickList } = useApiContext();
@@ -17,6 +18,7 @@ const Home = () => {
   const [sickList, setSickList] = useState<SickData[] | []>([]);
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
+  const { submitSearch } = useSubmitSearch(setIsFocused, setInputValue);
 
   const checkValidText = (value: string) => {
     const isCompletedText = /^[\uAC00-\uD7A3|A-Z|a-z|\s]*$/.test(value);
@@ -51,16 +53,18 @@ const Home = () => {
           setIsFocused={setIsFocused}
           inputValue={inputValue}
           setInputValue={setInputValue}
+          submitSearch={submitSearch}
         />
         {isFocused && (
           <SearchClear setInputValue={setInputValue} setData={setSickList} />
         )}
-        <SearchButton inputValue={inputValue} />
+        <SearchButton inputValue={inputValue} submitSearch={submitSearch} />
         {isFocused && (
           <KeywordList
             inputValue={inputValue}
             data={sickList}
             recentKeys={getRecentKeys()}
+            submitSearch={submitSearch}
           />
         )}
       </SearchBar>
