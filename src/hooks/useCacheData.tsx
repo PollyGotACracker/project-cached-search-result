@@ -10,7 +10,7 @@ const useCacheData = <T,>(expiresHour: number) => {
   const getCachedItem = (key: string): T[] | undefined => cachedList[key]?.data;
 
   const setCachedItem = (key: string, value: T[] | []) => {
-    if (checkEmptyText(key) || cachedList.hasOwnProperty(key)) return;
+    if (checkEmptyText(key) || cachedList.hasOwnProperty(key)) return false;
     const expires = new Date(Date.now() + expiresHour * 60 * 60 * 1000);
     const cached = { data: value, expires: expires };
     setCachedList({ ...cachedList, [key]: cached });
@@ -33,7 +33,7 @@ const useCacheData = <T,>(expiresHour: number) => {
     return () => clearInterval(interval);
   }, [cachedList]);
 
-  return { getCachedItem, setCachedItem };
+  return { cachedList, getCachedItem, setCachedItem };
 };
 
 export default useCacheData;
