@@ -14,9 +14,13 @@ const SearchClear: React.FC<SearchClearProps<SickData>> = ({
   return (
     <StyledSearchClear
       type="button"
-      title="지우기"
       tabIndex={-1}
-      onClick={() => {
+      onClick={(e) => {
+        e.stopPropagation();
+        const target = e.currentTarget as HTMLButtonElement;
+        const input = target.parentElement?.firstElementChild
+          ?.firstElementChild as HTMLInputElement;
+        input.focus();
         setInputValue("");
         setData([]);
       }}
