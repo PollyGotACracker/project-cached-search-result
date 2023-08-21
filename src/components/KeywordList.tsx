@@ -3,6 +3,8 @@ import { SickData } from "../types/sick";
 import KeywordItem from "./KeywordItem";
 import SearchIcon from "./SearchIcon";
 import KeywordGroup from "./KeywordGroup";
+import RecommendList from "./RecommendList";
+import searchSubmit from "../utils/searchSubmit";
 
 type KeywordListProps = {
   recentKeys: string[];
@@ -29,7 +31,10 @@ const KeywordList: React.FC<KeywordListProps> = ({
   return (
     <StyledKeywordList>
       {inputValue && (
-        <StyledKeywordValue>
+        <StyledKeywordValue
+          tabIndex={0}
+          onClick={(e) => searchSubmit(e, inputValue)}
+        >
           <SearchIcon size={18} invert={50} />
           {inputValue}
         </StyledKeywordValue>
@@ -43,9 +48,24 @@ const KeywordList: React.FC<KeywordListProps> = ({
         <KeywordGroup title={"추천 검색어"}>{content}</KeywordGroup>
       )}
       {isNoResults && <KeywordGroup title={"검색어 없음"} />}
+      {!inputValue && (
+        <>
+          <StyledHr />
+          <KeywordGroup title={"추천 검색어로 검색해보세요"}>
+            <RecommendList />
+          </KeywordGroup>
+        </>
+      )}
     </StyledKeywordList>
   );
 };
+
+const StyledHr = styled.hr`
+  background: #edf0f2;
+  height: 1px;
+  border: 0;
+  margin: 12px 0;
+`;
 
 const StyledKeywordList = styled.div`
   position: absolute;
@@ -54,22 +74,28 @@ const StyledKeywordList = styled.div`
   background-color: #ffffff;
   border-radius: 20px;
   width: 100%;
-  padding: 30px 0;
+  padding: 18px 0;
+  box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.02);
 `;
 
 const StyledKeywordValue = styled.div`
   width: 100%;
   display: flex;
   column-gap: 10px;
-  margin: 5px 0;
-  padding: 5px 30px;
+  margin-top: 10px;
+  padding: 8px 30px;
   outline: none;
   font-weight: 700;
+  cursor: pointer;
 
   & > svg {
     width: 18px;
     filter: invert(50%);
     flex-shrink: 0;
+  }
+  &:hover,
+  &:focus {
+    background-color: #f8f9fa;
   }
 `;
 

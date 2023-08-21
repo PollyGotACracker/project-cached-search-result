@@ -16,15 +16,17 @@ const KeywordItem: React.FC<KeywordItemProps> = ({
   result,
 }) => {
   const highlighted = result && getHighlighted(result?.sickNm, inputValue);
+  const searchHandler = (e: React.SyntheticEvent) => {
+    const word = result?.sickNm || recent;
+    searchSubmit(e, word);
+  };
 
   return (
     <StyledKeywordItem
       data-code={result?.sickCd || recent}
       tabIndex={0}
-      onClick={(e) => {
-        const word = result?.sickNm || recent;
-        searchSubmit(e, word);
-      }}
+      onClick={searchHandler}
+      onKeyDown={searchHandler}
     >
       <SearchIcon size={18} invert={50} />
       {highlighted || recent}
@@ -39,11 +41,11 @@ const StyledKeywordItem = styled.div`
   margin: 5px 0;
   cursor: pointer;
   outline: none;
-  padding: 5px 30px;
+  padding: 8px 30px;
 
   &:hover,
   &:focus {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: #f8f9fa;
   }
 `;
 

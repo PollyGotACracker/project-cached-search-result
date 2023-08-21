@@ -13,20 +13,19 @@ const KeywordGroup: React.FC<{
 };
 
 const StyledListTitle = styled.div`
-  padding: 0 30px 10px;
-  font-weight: 700;
+  padding: 10px 30px;
+  font-weight: 600;
   font-size: 0.8rem;
-  color: gray;
+  color: #6a737b;
 `;
 
 const StyledListContent = styled.div<{ $children?: React.ReactNode }>`
   ${({ $children }) =>
     typeof $children === "string" &&
     css`
-      padding: 0 30px;
-      color: #aaa;
+      padding: 12px 30px;
+      color: #afafb7;
       font-weight: 700;
-      margin-top: 10px;
     `}
 `;
 
