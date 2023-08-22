@@ -49,7 +49,7 @@ const KeywordList: React.FC<KeywordListProps> = ({
           tabIndex={0}
           onClick={(e) => submitSearch(e, inputValue)}
         >
-          <SearchIcon size={18} invert={50} />
+          <SearchIcon size={18} />
           {inputValue}
         </StyledKeywordValue>
       )}
@@ -101,11 +101,6 @@ const StyledKeywordValue = styled.div`
   font-weight: 700;
   cursor: pointer;
 
-  & > svg {
-    width: 18px;
-    filter: invert(50%);
-    flex-shrink: 0;
-  }
   &:hover,
   &:focus {
     background-color: #f8f9fa;

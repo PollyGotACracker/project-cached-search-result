@@ -30,7 +30,7 @@ const KeywordItem: React.FC<KeywordItemProps> = ({
       onClick={searchHandler}
       onKeyDown={searchHandler}
     >
-      <SearchIcon size={18} invert={50} />
+      <SearchIcon size={18} />
       {highlighted || recent}
     </StyledKeywordItem>
   );

@@ -1,21 +1,19 @@
 // https://iconsvg.xyz/
 
-import { styled, css } from "styled-components";
+import { styled } from "styled-components";
 
-const SearchIcon: React.FC<{ size: number; invert: number }> = ({
-  size,
-  invert,
-}) => {
+const SearchIcon: React.FC<{
+  size: number;
+  strokeColor?: string;
+}> = ({ size, strokeColor }) => {
   return (
     <StyledSearchIcon
-      $size={size}
-      $invert={invert}
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
+      width={size}
       height="24"
       viewBox="0 0 24 24"
       fill="none"
-      stroke="#000000"
+      stroke={strokeColor}
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -26,12 +24,12 @@ const SearchIcon: React.FC<{ size: number; invert: number }> = ({
   );
 };
 
-const StyledSearchIcon = styled.svg<{ $size: number; $invert: number }>`
-  ${({ $size, $invert }) => css`
-    width: ${$size}px;
-    filter: invert(${$invert}%);
-  `}
+const StyledSearchIcon = styled.svg`
   flex-shrink: 0;
 `;
+
+SearchIcon.defaultProps = {
+  strokeColor: "#a7afb7",
+};
 
 export default SearchIcon;

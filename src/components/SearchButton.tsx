@@ -12,7 +12,7 @@ const SearchButton: React.FC<{
       title="검색"
       onClick={(e) => submitSearch(e, inputValue)}
     >
-      <SearchIcon size={24} invert={100} />
+      <SearchIcon size={24} strokeColor="#ffffff" />
     </StyledSearchButton>
   );
 };

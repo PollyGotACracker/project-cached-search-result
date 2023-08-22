@@ -29,7 +29,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
     >
       {!isFocused && !inputValue && (
         <StyledSearchInit>
-          <SearchIcon size={20} invert={60} />
+          <SearchIcon size={20} />
           <span>질환명을 입력해주세요</span>
         </StyledSearchInit>
       )}
