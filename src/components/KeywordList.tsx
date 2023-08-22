@@ -7,6 +7,7 @@ import RecommendList from "./RecommendList";
 import { submitSearchType } from "../hooks/useSubmitSearch";
 
 type KeywordListProps = {
+  isLoading: boolean;
   recentKeys: string[];
   data: SickData[];
   inputValue: string;
@@ -14,6 +15,7 @@ type KeywordListProps = {
 };
 
 const KeywordList: React.FC<KeywordListProps> = ({
+  isLoading,
   recentKeys,
   data,
   inputValue,
@@ -21,7 +23,6 @@ const KeywordList: React.FC<KeywordListProps> = ({
 }) => {
   const hasRecents = recentKeys.length !== 0;
   const hasResults = inputValue && data.length !== 0;
-  const isNoResults = inputValue && data.length === 0;
 
   const recents = recentKeys?.map((key) => (
     <KeywordItem
@@ -42,7 +43,8 @@ const KeywordList: React.FC<KeywordListProps> = ({
 
   return (
     <StyledKeywordList>
-      {inputValue && (
+      {inputValue && isLoading && <KeywordGroup title={"검색 중..."} />}
+      {inputValue && !isLoading && (
         <StyledKeywordValue
           tabIndex={0}
           onClick={(e) => submitSearch(e, inputValue)}
@@ -59,7 +61,6 @@ const KeywordList: React.FC<KeywordListProps> = ({
       {hasResults && (
         <KeywordGroup title={"추천 검색어"}>{content}</KeywordGroup>
       )}
-      {isNoResults && <KeywordGroup title={"검색어 없음"} />}
       {!inputValue && (
         <>
           <StyledHr />

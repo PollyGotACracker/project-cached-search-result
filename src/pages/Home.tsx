@@ -13,7 +13,7 @@ const Home = () => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
   const { submitSearch } = useSubmitSearch(setIsFocused, setInputValue);
-  const { sickList, setSickList } = useDebounce(inputValue, 100);
+  const { sickList, setSickList, isLoading } = useDebounce(inputValue, 50);
 
   return (
     <main>
@@ -32,6 +32,7 @@ const Home = () => {
         <SearchButton inputValue={inputValue} submitSearch={submitSearch} />
         {isFocused && (
           <KeywordList
+            isLoading={isLoading}
             inputValue={inputValue}
             data={sickList}
             recentKeys={getRecentKeys()}

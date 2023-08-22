@@ -10,6 +10,7 @@ const useDebounce = (keyword: string, delay: number) => {
   const { getSickList } = useApiContext();
   const { getCachedItem, setCachedItem } = useCacheData<SickData>(1);
   const [validKeyword, setValidKeyword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [savedData, setSavedData] = useState<savedDataType>({
     key: "",
     value: [],
@@ -34,7 +35,12 @@ const useDebounce = (keyword: string, delay: number) => {
     if (isValidText) {
       const data = getCachedItem(keyword);
       if (data) setSavedData({ key: keyword, value: [...data] });
-      else setValidKeyword(keyword);
+      else {
+        setIsLoading(() => {
+          setValidKeyword(keyword);
+          return true;
+        });
+      }
     }
   }, [keyword]);
 
@@ -46,7 +52,11 @@ const useDebounce = (keyword: string, delay: number) => {
       if (validKeyword !== "") {
         timerId.current = setTimeout(async () => {
           const data = await getSickList(validKeyword);
-          if (data) setSavedData({ key: validKeyword, value: [...data] });
+          if (data)
+            setIsLoading(() => {
+              setSavedData({ key: validKeyword, value: [...data] });
+              return false;
+            });
         }, delay);
       }
       return () => clearDebounceTimer();
@@ -60,7 +70,7 @@ const useDebounce = (keyword: string, delay: number) => {
     }
   }, [savedData]);
 
-  return { sickList, setSickList };
+  return { sickList, setSickList, isLoading };
 };
 
 export default useDebounce;
