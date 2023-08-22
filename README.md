@@ -16,28 +16,19 @@
 
 ## 실행 방법
 
-1. repository 에서 Code 버튼 클릭 후 HTTPS 주소 복사
-2. git bash 를 실행하고 `git clone <repo-url>`
-3. VSCode 에서 프로젝트를 열고 `npm install`, `npm start`
-4. 터미널 log 의 local 주소 ctrl + 클릭 (기본 port 4000)
+1. git bash 에서 아래 명령어 실행
 
-## 프로젝트 구조
+```bash
+git clone https://github.com/PollyGotACracker/project-query-cache.git
+```
 
-```
-📦project-query-cache
-┣ 📂public
-┣ 📂server
-┣ 📂src
-┃ ┣ 📂components
-┃ ┣ 📂contexts
-┃ ┣ 📂hooks
-┃ ┣ 📂pages
-┃ ┣ 📂services
-┃ ┃ ┣ 📂core
-┃ ┣ 📂styles
-┃ ┣ 📂types
-┗ ┗ 📂utils
-```
+2. VSCode 에서 프로젝트를 열고 `npm install`, `npm run dev` 실행
+   - `start` 명령어는 heroku 배포 시 ts 파일을 node 환경에서 실행
+3. 터미널 log 의 local 주소 ctrl + 클릭
+
+## 실행 화면
+
+![caching](https://github.com/PollyGotACracker/project-query-cache/assets/92136750/c0866539-0336-4635-97ad-27402002400f)
 
 ## 사용한 라이브러리
 
