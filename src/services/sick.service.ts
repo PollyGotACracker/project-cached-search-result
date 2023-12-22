@@ -10,7 +10,7 @@ export class SickService implements SickServiceType {
 
   async getSickList(value: string) {
     return await this.httpClient
-      .get(`/sick?q=${value}`)
+      .get(`/sick?sickNm_like=${value}`)
       .then((response) => {
         console.info("calling api");
         const isOk = response.status === 200;
