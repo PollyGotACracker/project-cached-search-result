@@ -39,5 +39,9 @@
     "ts-node": "^10.9.1",
     "typescript": "^5.0.2",
     "vite": "^4.4.0"
+  },
+  "overrides": {
+    "@babel/traverse": "^7.23.2",
+    "postcss": "^8.4.31"
   }
 }
