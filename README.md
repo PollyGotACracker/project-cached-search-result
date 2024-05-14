@@ -12,7 +12,7 @@
 
 ## 배포 주소
 
-- [https://project-query-cache-549505992e1e.herokuapp.com/](https://project-query-cache-549505992e1e.herokuapp.com/)
+- <s>`https://project-query-cache-549505992e1e.herokuapp.com/`</s>
 
 ## 실행 방법
 
